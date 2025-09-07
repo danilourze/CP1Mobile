@@ -1,20 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Toast from 'react-native-toast-message';
+import UserListScreen from './src/screens/UserListScreen';
+import UserFormScreen from './src/screens/UserFormScreen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="UserList"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#ed145b',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}>
+        <Stack.Screen
+          name="UserList"
+          component={UserListScreen}
+          options={{
+            title: 'Lista de Usuários',
+          }}
+        />
+        <Stack.Screen
+          name="UserForm"
+          component={UserFormScreen}
+          options={{
+            title: 'Formulário de Usuários',
+          }}
+        />
+      </Stack.Navigator>
+      <Toast />
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+ 
